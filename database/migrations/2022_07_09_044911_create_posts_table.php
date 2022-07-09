@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->longText('description');
             $table->text('excerpt');
+            $table->string('feature_img')->nullable();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
