@@ -8,6 +8,11 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('Post.index');
     }
 
     /**
@@ -25,7 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('Post.create');
     }
 
     /**

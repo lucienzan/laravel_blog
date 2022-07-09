@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        // $categories = Category::orderBy('id','desc')->get();
+        $categories = Category::orderBy('id','desc')->paginate(5);
+        return view('Category.index',compact('categories'));
     }
 
     /**
@@ -25,7 +34,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('Category.create');
     }
 
     /**
@@ -36,7 +45,14 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $category = new Category();
+        $category->title = $request->title;
+        $category->slug = Str::slug($request->slug);
+        $category->user_id = Auth::id(); 
+        //only id can allow to use short method like Auth::id() if you use other title instead of using id, you have to use Auth:user()->title
+        $category->save();
+        // return $category;
+        return redirect()->route('category.index')->with('status','New Category Added');
     }
 
     /**
@@ -47,7 +63,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return abort('404');
     }
 
     /**
@@ -58,7 +74,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('Category.edit', compact('category'));
     }
 
     /**
@@ -70,7 +86,10 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->title = $request->title;
+        $category->slug = Str::slug($request->slug);
+        $category->update();
+        return redirect()->route('category.index')->with('status',$category->title." is updated");
     }
 
     /**
@@ -81,6 +100,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('category.index')->with('status',$category->title." is deleted");
     }
 }
