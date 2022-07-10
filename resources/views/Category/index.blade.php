@@ -42,7 +42,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td>No categories are added.</td>
+                        <td class="text-center" colspan="5">No categories are added.</td>
                     </tr>
                     @endforelse
                 </tbody>
