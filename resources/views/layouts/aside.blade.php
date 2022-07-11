@@ -13,3 +13,7 @@
     <a href="{{ route('category.index') }}" class="list-group-item list-group-item-action">Category Lists</a>
     <a href="{{ route('category.create') }}" class="list-group-item list-group-item-action">Create Category</a>
 </div>
+<p class="small text-white mb-0">User Management</p>
+<div class="list-group mb-3">
+    <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action">User Lists</a>
+</div>

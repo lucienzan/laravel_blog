@@ -52,12 +52,16 @@
                                 <p class="small mb-0 text-black-50">{{ $post->created_at->format('h : m A') }}</p>
                             </td>
                             <td  class="text-nowrap"> 
+                               @can('delete',$post)
                                <form class="d-inline-block" action="{{ route('post.destroy',$post->id) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
                                 </form>
-                                <a href="{{ route('post.edit', $post->id) }}" class="btn btn-outline-info"><i class="bi bi-pencil"></i></a>
+                               @endcan
+                               @can('update',$post)
+                               <a href="{{ route('post.edit', $post->id) }}" class="btn btn-outline-info"><i class="bi bi-pencil"></i></a>
+                               @endcan
                                 <a href="{{ route('post.show', $post->id) }}" class="btn btn-outline-warning"><i class="bi bi-info-circle"></i></a>
                             </td>
                         </tr>

@@ -5,7 +5,7 @@
             <div aria-label="breadcrumb" class="breadcrumb-nav">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('category.index') }}">Categories</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Edit Categories</li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Category</li>
                 </ol>
               </div>
         <div class="card p-0">

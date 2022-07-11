@@ -7,8 +7,8 @@ use App\Models\Category;
         <div class="row px-3">
             <div aria-label="breadcrumb" class="breadcrumb-nav">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Test</li>
+                    <li class="breadcrumb-item"><a href="{{ route('post.index') }}">Posts</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Post</li>
                 </ol>
               </div>
         <div class="card p-0">

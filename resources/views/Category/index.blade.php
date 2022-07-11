@@ -1,3 +1,6 @@
+@php
+    use App\Models\User;
+@endphp
 @extends('layouts.app')
 @section('content')
     <div class="row px-3">
@@ -17,6 +20,7 @@
                         <th>#</th>
                         <th>Title</th>
                         <th>Slug</th>
+                        <th>User</th>
                         <th>Created_at</th>
                         <th>Control</th>
                     </tr>
@@ -27,17 +31,22 @@
                         <td>{{ $key+1 }}</td>
                         <td>{{ $category->title }}</td>
                         <td>{{ $category->slug }}</td>
+                        <td>{{ User::find($category->user_id)->name }}</td>
                         <td class="text-nowrap">
                             <p class="small mb-0 text-black-50">{{ $category->created_at->format('d M Y') }}</p>
                             <p class="small mb-0 text-black-50">{{ $category->created_at->format('h : m A') }}</p>
                         </td>
                         <td class="text-nowrap"> 
-                           <form class="d-inline-block" action="{{ route('category.destroy',$category->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
-                            </form>
+                            @can('delete',$category)
+                            <form class="d-inline-block" action="{{ route('category.destroy',$category->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            @endcan
+                            @can('update',$category)
                             <a href="{{ route('category.edit', $category->id) }}" class="btn btn-outline-info"><i class="bi bi-pencil"></i></a>
+                            @endcan
                         </td>
                     </tr>
                     @empty

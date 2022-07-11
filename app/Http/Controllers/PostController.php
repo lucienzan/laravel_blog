@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdatePostRequest;
@@ -99,6 +99,9 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        if(Gate::denies('update',$post)){
+            return abort('403','you are not allowed to update');
+        };
         $post->title = $request->title;
         $post->slug = Str::slug($request->title);
         $post->description = $request->description;
@@ -128,6 +131,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if(Gate::denies('delete',$post)){
+            return abort('403','you are not allowed to delete');
+        };
         Storage::delete('public/'.$post->feature_img);
         $post->delete();
         return to_route('post.index');
