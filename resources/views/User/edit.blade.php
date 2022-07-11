@@ -1,5 +1,6 @@
 @php 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -50,9 +51,17 @@ use App\Models\User;
                         <label class="form-label" for="role">Select Roles</label>
                         <select type="text" name="role" id="role" class="form-select @error('role') is-invalid @enderror">
                             <option selected disabled>Select Roles</option>
-                            <option value="0"{{ User::where('role',$user->id) ? "selected": "" }}>Admin</option>
-                            <option value="1" {{ User::where('role',$user->id) ? "selected": "" }}>Editor</option>
-                            <option value="2" {{ User::where('role',$user->id) ? "selected": "" }}>Author</option>
+                            @php
+                            $roles = array('Admin','Editor','Author');
+                            foreach($roles as $key => $role){
+                            @endphp
+                            <option value="{{ $key }}" {{ $role == $user->roleName ? "selected" : "" }}>{{ $role }}</option>
+                            @php
+                            };
+                            @endphp
+                            {{-- <option value="0"{{ Auth::user()->role == $user->role  ? "selected": "" }}>Admin</option>
+                            <option value="1" {{ Auth::user()->role == $user->role ? "selected": "" }}>Editor</option>
+                            <option value="2" {{ Auth::user()->role == $user->role ? "selected": "" }}>Author</option> --}}
                         </select>
                         @error('role')
                             <div class="invalid-feedback">
@@ -67,4 +76,5 @@ use App\Models\User;
             </div>
         </div>
     </div>
+   
 @endsection

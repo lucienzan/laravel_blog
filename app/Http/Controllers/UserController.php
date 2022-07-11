@@ -8,6 +8,10 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('IsAdmin'); //use use parameter $this->middleware('IsAdmin:admin')
+    }
     /**
      * Display a listing of the resource.
      *

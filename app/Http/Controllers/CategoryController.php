@@ -23,8 +23,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // $categories = Category::orderBy('id','desc')->get();
-        $categories = Category::orderBy('id','desc')->paginate(5);
+        // $categories = Category::orderBy('id','desc')->paginate(5);
+        $categories = Category::orderBy('id','desc')
+        ->when(Auth::user()->roleName === "Author",fn($q)=>$q->where("user_id",Auth::id()))->paginate(5);
         return view('Category.index',compact('categories'));
     }
 
@@ -64,6 +65,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        // return $category->User;
         return abort('404');
     }
 
@@ -75,6 +77,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        Gate::authorize('update',$category);
         return view('Category.edit', compact('category'));
     }
 

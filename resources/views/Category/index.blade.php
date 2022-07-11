@@ -20,7 +20,11 @@
                         <th>#</th>
                         <th>Title</th>
                         <th>Slug</th>
+                        {{-- @if (Auth::user()->roleName !== "Author") --}}
+                        @isAuthor {{-- create a custom directive at providers --}}
                         <th>User</th>
+                        @endisAuthor
+                        {{-- @endif --}}
                         <th>Created_at</th>
                         <th>Control</th>
                     </tr>
@@ -31,8 +35,11 @@
                         <td>{{ $key+1 }}</td>
                         <td>{{ $category->title }}</td>
                         <td>{{ $category->slug }}</td>
-                        <td>{{ User::find($category->user_id)->name }}</td>
-                        <td class="text-nowrap">
+                        @isAuthor                        
+                        {{-- <td>{{ User::find($category->user_id)->name }}</td> --}}
+                        <td>{{ $category->User->name ?? 'unknown' }}</td>
+                        @endisAuthor
+                         <td class="text-nowrap">
                             <p class="small mb-0 text-black-50">{{ $category->created_at->format('d M Y') }}</p>
                             <p class="small mb-0 text-black-50">{{ $category->created_at->format('h : m A') }}</p>
                         </td>
@@ -51,7 +58,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td class="text-center" colspan="5">No categories are added.</td>
+                        <td class="text-center" colspan="6">No categories are added.</td>
                     </tr>
                     @endforelse
                 </tbody>

@@ -10,6 +10,13 @@ class CategoryPolicy
 {
     use HandlesAuthorization;
 
+
+    public function before(User $user){
+        if($user->roleName === "Admin" || $user->roleName === "Editor"){
+            return true;
+        }
+        return null ; //* don't use false * , you can aslo don't use return null but if you want to
+    }
     /**
      * Determine whether the user can view any models.
      *

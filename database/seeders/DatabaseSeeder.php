@@ -29,16 +29,10 @@ class DatabaseSeeder extends Seeder
             'roleName' => 'Admin',
         ]);
         
-        $categories = ['News','Daily Blogs','Health','Movie','Foods & Drinks','Music','Science','IT','Arts & Entertainment','Sports & Gamings','lifestyle'];
-        
-        foreach($categories as $category){
-            Category::factory()->create([
-                'title' => $category,
-                'slug' => Str::slug($category),
-                'user_id' => User::inRandomOrder()->first()->id,
-            ]);
-        };
+        $this->call([
+            CategorySeeder::class,
+            PostSeeder::class,
+        ]);
 
-        Post::factory(50)->create();
     }
 }

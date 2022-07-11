@@ -19,6 +19,7 @@
                         @endif
     
                         {{ __('You are logged in!') }}
+                        {{-- <p> @abc(true) you know @endabc | @myName('star') </p> --}}
                     </div>
                 </div>
             </div>

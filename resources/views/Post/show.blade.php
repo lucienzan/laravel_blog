@@ -19,8 +19,10 @@
                 <h2>{{ $post->title }}</h2>
                 <div class="mt-3">
                     <span>{{ $post->created_at->format('d M Y') }} | </span>
-                    <span>{{ User::find($post->user_id)->name }} | </span>
-                    <span>{{ Category::find($post->category_id)->title }}</span>
+                    {{-- <span>{{ User::find($post->user_id)->name }} | </span> --}}
+                    <span>{{ $post->User->name }} | </span>
+                    {{-- <span>{{ Category::find($post->category_id)->title }}</span> --}}
+                    <span>{{ $post->Category->title }}</span> {{-- make a method in models --}}
                 </div>
                 <div class="mt-3">
                     <p>{{ $post->description }}</p>

@@ -33,7 +33,9 @@
                             <th>Description</th>
                             <th>Feature_Image</th>
                             <th>Category</th>
+                            @isAuthor
                             <th>User</th>
+                            @endisAuthor
                             <th>Created_at</th>
                             <th>Control</th>
                         </tr>
@@ -45,8 +47,12 @@
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->excerpt }}</td>
                             <td>{{ $post->feature_img }}</td>
-                            <td>{{ Category::find($post->category_id)->title }}</td>
-                            <td>{{ User::find( $post->user_id )->name }}</td>
+                            {{-- <td>{{ Category::find($post->category_id)->title }}</td> --}}
+                            <td>{{ $post->Category->title }}</td>
+                            @isAuthor                            
+                            {{-- <td>{{ User::find( $post->user_id )->name }}</td> --}}
+                            <td>{{ $post->User->name }}</td>
+                            @endisAuthor
                             <td class="text-nowrap">
                                 <p class="small mb-0 text-black-50">{{ $post->created_at->format('d M Y') }}</p>
                                 <p class="small mb-0 text-black-50">{{ $post->created_at->format('h : m A') }}</p>
