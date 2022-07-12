@@ -25,6 +25,7 @@
                         <th>User</th>
                         @endisAuthor
                         {{-- @endif --}}
+                        <th>Number of posts</th>
                         <th>Created_at</th>
                         <th>Control</th>
                     </tr>
@@ -39,6 +40,7 @@
                         {{-- <td>{{ User::find($category->user_id)->name }}</td> --}}
                         <td>{{ $category->User->name ?? 'unknown' }}</td>
                         @endisAuthor
+                        <td>{{ $category->post()->count() }}</td>
                          <td class="text-nowrap">
                             <p class="small mb-0 text-black-50">{{ $category->created_at->format('d M Y') }}</p>
                             <p class="small mb-0 text-black-50">{{ $category->created_at->format('h : m A') }}</p>

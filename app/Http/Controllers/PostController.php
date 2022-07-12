@@ -31,7 +31,9 @@ class PostController extends Controller
             ->orWhere('description','like',"%$keyword%");
         })
         ->when(Auth::user()->roleName === "Author",fn($q)=>$q->where("user_id",Auth::id()))
-        ->latest('id')->paginate(5)->withQueryString(); //use withQuerystring for pagination when ever you add search 
+        ->latest('id')
+        ->with(['Category','User'])
+        ->paginate(5)->withQueryString(); //use withQuerystring for pagination when ever you add search 
         return view('Post.index',compact('posts'));
     }
 

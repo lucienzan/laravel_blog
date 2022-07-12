@@ -5,6 +5,8 @@
     <i class="bi bi-moon text-white"></i>
     <a href="{{ route('home') }}" class="list-group-item list-group-item-action">Home</a>
     <a href="{{ route('test') }}" class="list-group-item list-group-item-action">Test</a>
+    <a href="{{ route('photo.index') }}" class="list-group-item list-group-item-action">Gallery</a>
+
 </div>
 <p class="small text-white mb-0">Manage Posts</p>
 <div class="list-group mb-3">

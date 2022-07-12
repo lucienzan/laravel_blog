@@ -25,7 +25,9 @@ class CategoryController extends Controller
     {
         // $categories = Category::orderBy('id','desc')->paginate(5);
         $categories = Category::orderBy('id','desc')
-        ->when(Auth::user()->roleName === "Author",fn($q)=>$q->where("user_id",Auth::id()))->paginate(5);
+        ->when(Auth::user()->roleName === "Author",fn($q)=>$q->where("user_id",Auth::id()))
+        ->with(['User'])
+        ->paginate(5);
         return view('Category.index',compact('categories'));
     }
 

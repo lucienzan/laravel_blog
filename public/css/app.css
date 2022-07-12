@@ -6788,6 +6788,11 @@ table {
   vertical-align: middle !important;
 }
 
+.gallery {
+  -moz-columns: 3 200px;
+       columns: 3 200px;
+}
+
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
