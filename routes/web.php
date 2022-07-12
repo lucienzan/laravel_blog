@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\PhotoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,5 +29,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test',[HomeController::class, 'test'])->name('test');
 Route::resource('/category',CategoryController::class);
 Route::resource('/post',PostController::class);
+Route::resource('/photo',PhotoController::class);
 Route::resource('/user',UserController::class)->middleware('IsAdmin');
 });

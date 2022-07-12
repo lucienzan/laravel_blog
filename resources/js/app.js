@@ -20,4 +20,7 @@ window.showToast = function(message){
       })
 }
 
-
+window.showCarousel = function(){
+  let x = document.querySelector('.carousel-inner');
+    x.children[0].classList.add('active')
+}

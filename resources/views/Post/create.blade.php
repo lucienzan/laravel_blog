@@ -44,6 +44,15 @@ use App\Models\Category;
                     @enderror
                    </div>
                    <div class="mb-4">
+                    <label class="form-label" for="photos">Post Photos</label>
+                    <input type="file" name="photos[]" id="photos" class="form-control @error('photos.*') is-invalid @enderror" multiple>
+                    @error('photos.*')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                   </div>
+                   <div class="mb-4">
                     <label for="describe">Description</label>
                     <textarea name="description" id="describe" class="form-control @error('description')
                         is-invalid

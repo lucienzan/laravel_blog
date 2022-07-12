@@ -5,7 +5,7 @@
             <div aria-label="breadcrumb" class="breadcrumb-nav">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('category.index') }}">Category</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('category.index') }}">Categories</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Create Category</li>
                 </ol>
             </div>

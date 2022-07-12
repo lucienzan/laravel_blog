@@ -84,12 +84,15 @@ class UserController extends Controller
         switch ($user->role) {
             case '0':
                 $user->roleName = "Admin";
+                $user->role = "0";
                 break;
             case '1':
                 $user->roleName = "Editor";
+                $user->role = "1";
                 break;
             default:
                 $user->roleName = "Author";
+                $user->role = "2";
                 break;
         }
         $user->update();

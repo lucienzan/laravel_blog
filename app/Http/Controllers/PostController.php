@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Photo;
 
 class PostController extends Controller
 {
@@ -52,6 +53,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        //save posts
         $posts = new Post();
         $posts->title = $request->title;
         $posts->slug = Str::slug($request->title);
@@ -66,6 +68,23 @@ class PostController extends Controller
             $posts->feature_img = $newName ;
         }
         $posts->save();
+
+        // return $posts this has includes all data
+
+        //save photos
+        foreach($request->photos as $photo){
+            $newName = uniqid()."_post_image.".$photo->extension();
+            $photo->storeAs("public",$newName);
+
+            $photos = new Photo();
+            $photos->post_id = $posts->id;
+            $photos->name = $newName;
+            $photos->save();
+        };
+
+
+
+
         // return redirect()->route('post.index')->with('status','New post added');
         return to_route('post.index')->with('status','New post added');
     }
@@ -104,6 +123,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        // return $request;
         if(Gate::denies('update',$post)){
             return abort('403','you are not allowed to update');
         };
@@ -125,6 +145,18 @@ class PostController extends Controller
             $post->feature_img = $newName ;
         }
         $post->update();
+        //save photos
+            if($request->hasFile('photos')){
+                foreach($request->photos as $photo){
+                    $newName = uniqid()."_post_image.".$photo->extension();
+                    $photo->storeAs("public",$newName);
+        
+                    $photos = new Photo();
+                    $photos->post_id = $post->id;
+                    $photos->name = $newName;
+                    $photos->save();
+            }
+            }
         return to_route('post.index')->with('status', 'Current post updated');
     }
 
@@ -139,7 +171,14 @@ class PostController extends Controller
         if(Gate::denies('delete',$post)){
             return abort('403','you are not allowed to delete');
         };
+
         Storage::delete('public/'.$post->feature_img);
+
+        foreach($post->Photos as $photo){
+        Storage::delete('public/'.$photo->name);
+        $photo->delete();
+        }
+
         $post->delete();
         return to_route('post.index');
     }

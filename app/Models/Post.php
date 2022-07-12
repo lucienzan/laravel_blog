@@ -16,4 +16,8 @@ class Post extends Model
     public function User(){
         return $this->belongsTo(User::class); //post to user
     }
+
+    public function Photos(){
+        return $this->hasMany(Photo::class); //post to photo
+    }
 }
