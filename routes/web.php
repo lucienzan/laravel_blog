@@ -24,11 +24,11 @@ use App\Http\Controllers\CategoryController;
 // });
 Route::get('/',[PageController::class,'index'])->name('page.index');
 Route::get('/detail/{slug}',[PageController::class,'detail'])->name('page.detail');
-Route::get("/cat/{category:slug}",[PageController::class,'postByCategory'])->name('page.category');
+Route::get("/category/{category:slug}",[PageController::class,'postByCategory'])->name('page.category');
 
 Auth::routes();
 
-Route::middleware('auth')->group(function(){
+Route::prefix('dashboard')->middleware('auth')->group(function(){
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/test',[HomeController::class, 'test'])->name('test');
 Route::resource('/category',CategoryController::class);

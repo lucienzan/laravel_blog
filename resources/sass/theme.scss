@@ -1,3 +1,9 @@
 @import "_bsvariables.scss";
 @import '~bootstrap/scss/bootstrap';
 @import "_bootswatch.scss";
+@import "~venobox/dist/venobox.css";
+
+.detail-img{
+    height: 500px;
+    object-fit: cover;
+}

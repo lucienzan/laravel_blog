@@ -47,7 +47,6 @@ class PageController extends Controller
             ->with(['user','category'])
             ->paginate(10)
             ->withQueryString();
-
         return view('index',compact('posts','category'));
 
     }

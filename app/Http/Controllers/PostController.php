@@ -33,7 +33,7 @@ class PostController extends Controller
         ->when(Auth::user()->roleName === "Author",fn($q)=>$q->where("user_id",Auth::id()))
         ->latest('id')
         ->with(['Category','User'])
-        ->paginate(5)->withQueryString(); //use withQuerystring for pagination when ever you add search 
+        ->paginate(5)->withQueryString(); //use withQuerystring for pagination when ever you added search 
         return view('Post.index',compact('posts'));
     }
 
